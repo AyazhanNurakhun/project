@@ -1,0 +1,43 @@
+<div class="prof-comp">
+  <div *ngIf="myProfile">
+    <div class="profile__top">
+      <div class="profile__top__image--wrapper" *ngIf="myProfile.image">
+        <img src="{{ myProfile.image }}" alt="" class="profile__top__image">
+      </div>
+      <div class="profile__title">
+        <p class="title">{{ myProfile.user.username }}</p>
+        <p>{{ myProfile.user.email }}</p>
+        <!-- <p>{{ myProfile.user.birthday }}</p> -->
+      </div>
+    </div>
+    <div class="follow">
+      <div class="following">
+        <h3>Following: {{ following_count }}</h3>
+        <div *ngFor="let followingItem of myProfile.following">
+          <p>
+            <a routerLink="/profile/{{ followingItem.id }}">
+              {{ followingItem.name }}
+            </a>
+          </p>
+        </div>
+      </div>
+      <div class="followers">
+        <h3>Followers: {{ followers_count }}</h3>
+        <div *ngFor="let follower of myProfile.followers">
+          <p>
+            <a routerLink="/profile/{{ follower.id }}"> {{ follower.name }} </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="profile__posts">
+      <h3>POSTS: {{ posts_count }}</h3>
+      <div *ngFor="let post of myProfile.own_posts">
+        <p>
+          <a routerLink="/post/{{ post.id }}"> {{ post.title }} </a>
+        </p>
+      </div>
+    </div>
+    <app-create-post></app-create-post>
+  </div>
+</div>

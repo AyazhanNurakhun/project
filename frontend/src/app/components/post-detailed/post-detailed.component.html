@@ -1,0 +1,31 @@
+<div class="post">
+  <div class="upper post__top" *ngIf="post">
+    <a class="upper" routerLink="/profile/{{ post.author.id }}">
+      {{ post.author.user.username }}
+    </a>
+    {{ post.created_at }}
+  </div>
+  <p class="label">{{ post.title }}</p>
+  <p class="post__text">{{ post.text }}</p>
+
+  <button
+    class="post-likes"
+    [ngClass]="{ isLiked: isLikedByMe }"
+    (click)="onLikeClick()"
+  >
+    Likes: {{ likeCount }}
+  </button>
+  <h3 class="comment">Comments:</h3>
+  <div class="post-comments">
+    <div *ngFor="let comment of comments" class="comment-inner">
+      <a class="upper" routerLink="/profile/{{ comment.owner.id }}">{{
+        comment.owner.user.username
+      }}</a>
+      <p>{{ comment.text }}</p>
+    </div>
+    <div class="add-comment">
+      <input type="text" [(ngModel)]="newComment" />
+      <button (click)="onNewComment()">New Comment</button>
+    </div>
+  </div>
+</div>
